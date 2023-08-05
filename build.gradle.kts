@@ -26,6 +26,7 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("dev.kord:kord-core:0.10.0")
+    //implementation("com.gitlab.kordlib.kord:kord-core:0.7.1")
     //Private API for discord kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")

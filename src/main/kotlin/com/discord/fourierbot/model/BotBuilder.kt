@@ -8,7 +8,12 @@ import dev.kord.common.annotation.KordPreview
 import dev.kord.core.Kord
 import dev.kord.core.event.message.MessageCreateEvent
 import dev.kord.core.on
-
+import dev.kord.common.kColor
+import dev.kord.core.behavior.edit
+import dev.kord.core.event.gateway.ReadyEvent
+import dev.kord.rest.builder.message.EmbedBuilder.Limits.title
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.forEach
 
 class BotBuilder {
     lateinit var kord: Kord

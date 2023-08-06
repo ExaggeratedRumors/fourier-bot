@@ -3,7 +3,6 @@ package com.discord.fourierbot.commands
 import com.discord.fourierbot.encryption.CodesManager
 import com.discord.fourierbot.processing.ImagesManager
 import com.discord.fourierbot.utils.IMAGES_PATH
-import com.discord.fourierbot.utils.ITEM_IMAGE_PATH
 import com.discord.fourierbot.utils.Resources
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.utils.FileUpload

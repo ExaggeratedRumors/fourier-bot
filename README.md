@@ -45,3 +45,70 @@ admin_id: YOUR_DISCORD_ID
 ```
 ./gradlew run
 ```
+
+## Bot activity
+
+Basic bot activity includes `registerCommands`, `registerListener` and `build` methods.
+```kotlin
+    fun startActivity() {
+        reloadResources()
+        try {
+            botBuilder.registerCommands(Resources.commandsList)
+            botBuilder.registerListener()
+            botBuilder.build(Resources.configuration)
+        } catch (e: IllegalStateException) {
+            e.printStackTrace()
+            exitProcess(1)
+        }
+    }
+```
+
+Listener is responsible for handling registered commands.
+```kotlin
+override fun onMessageReceived(event: MessageReceivedEvent) {
+        if(event.author.isBot) return
+        val prefix = event.message.contentRaw.substring(
+            0, Resources.configuration.prefix.length
+        )
+        if(prefix != Resources.configuration.prefix) return
+        val message = event.message.contentRaw.drop(
+            Resources.configuration.prefix.length
+        )
+        registeredCommands.forEach { (_, command) ->
+            if(message.split(" ")[0] == command.call) {
+                println("ENGINE: Attempt to execute command ${command.call}")
+                command.execute(event.message)
+            }
+        }
+    }
+```
+
+## Commands
+
+Implemented commands are placed in `CommandsContainer` object:
+```kotlin
+class CommandsContainer {
+    companion object {
+        val implementedCommands: List<Command> = listOf (
+            Leak(),
+            Share()
+        )
+    }
+}
+```
+
+Registered commands and their calls are played in `commands.yaml` file:
+```yaml
+commands:
+  "Leak":
+    call: somecall
+    enabled: true
+  "Share":
+    call: someothercall
+    enabled: true
+```
+
+
+
+
+

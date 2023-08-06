@@ -8,7 +8,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Configuration (
     val client: ClientData = ClientData(),
-    val prefix: String = String()
+    val prefix: String = String(),
+    val key_length: Int = 10
 )
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)

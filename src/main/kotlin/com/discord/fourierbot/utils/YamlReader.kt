@@ -29,7 +29,7 @@ class YamlReader {
                     mapper.readValue(it, valueType)
                 }
         } catch (e: Exception) {
-            println("Cannot read $sourcePath file or file is incorrect with data object.")
+            println("ENGINE: Cannot read $sourcePath file or file is incorrect with data object.")
             exitProcess(1)
         }!!
     }

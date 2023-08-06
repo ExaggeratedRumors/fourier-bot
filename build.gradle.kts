@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.8.22"
+    application
 }
 
 group = "com.discord"
@@ -32,4 +33,8 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+application {
+    mainClass.set("com.discord.fourierbot.FourierBotApplicationKt")
 }

@@ -17,7 +17,7 @@ class BotListener(private val registeredCommands: Map<String, Command>): Listene
             Resources.configuration.prefix.length
         )
         registeredCommands.forEach { (_, command) ->
-            if(message == command.call) {
+            if(message.split(" ")[0] == command.call) {
                 println("ENGINE: Attempt to execute command ${command.call}")
                 command.execute(event.message)
             }

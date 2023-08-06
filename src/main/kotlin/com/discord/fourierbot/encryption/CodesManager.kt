@@ -8,7 +8,7 @@ import javax.crypto.KeyGenerator
 import kotlin.system.exitProcess
 
 class CodesManager() {
-    private fun generateKey(keyLength: Int): String {
+    fun generateKey(keyLength: Int): String {
         try {
             val key = KeyGenerator
                 .getInstance(Resources.keyAlgorithm)
@@ -25,14 +25,22 @@ class CodesManager() {
         }
     }
 
-    fun addEntity(userId: Long) {
+    fun addEntity(userId: Long, userName: String): String{
         val key = generateKey(Resources.configuration.key_length)
         Resources.keys.modify {
-            this.add(UserEntity(userId, key))
+            this.add(UserEntity(userId, userName, key))
         }
+        return key
     }
 
-    fun getUserCode(userId: Long): String? {
+    fun getUserNameByCode(userCode: String): String? {
+        Resources.keys.userEntities.forEach {
+            if(it.code == userCode) return it.userName
+        }
+        return null
+    }
+
+    fun getUserCodeById(userId: Long): String? {
         Resources.keys.userEntities.forEach {
             if(it.userId == userId) return it.code
         }

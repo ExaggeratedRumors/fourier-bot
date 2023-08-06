@@ -1,0 +1,7 @@
+commands:
+  "Leak":
+    call: wyciek
+    enabled: true
+  "Share":
+    call: itemy
+    enabled: true

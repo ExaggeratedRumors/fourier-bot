@@ -1,10 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.1.2"
-    id("io.spring.dependency-management") version "1.1.2"
     kotlin("jvm") version "1.8.22"
-    kotlin("plugin.spring") version "1.8.22"
 }
 
 group = "com.discord"
@@ -19,26 +16,18 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("ch.qos.logback:logback-classic:1.4.7")
+    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.20.0")
+    implementation("org.slf4j:jul-to-slf4j:2.0.5")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2")
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-    implementation("dev.kord:kord-core:0.10.0")
-    //implementation("com.gitlab.kordlib.kord:kord-core:0.7.1")
-    //Private API for discord kotlin
+    implementation("net.dv8tion:JDA:5.0.0-beta.5")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.projectreactor:reactor-test")
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = "17"
-    }
+    kotlinOptions.jvmTarget = "17"
 }
 
 tasks.withType<Test> {

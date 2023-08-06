@@ -1,8 +1,0 @@
-client:
-  client_name: "fourier-bot"
-  client_id: "1137078345784361049"
-  client_secret: "uX_K7wabn0-oP4vKGG3WgpvbEIQLKUP0"
-  public_key: "8e619a0c835c9bd9096d401c47267f758b9e96629de358fdd6982d4a74a5fd63"
-  token: "MTEzNzA3ODM0NTc4NDM2MTA0OQ.GaNJ3-.CiWubTvtuz1VVZyNRw8wxbRFRAXQ7zB5i16Iq4"
-  permission_integer: 100352
-prefix: "!"

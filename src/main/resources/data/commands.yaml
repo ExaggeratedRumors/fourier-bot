@@ -2,6 +2,20 @@ commands:
   "Leak":
     call: wyciek
     enabled: true
+    prefix: true
   "Share":
     call: itemy
     enabled: true
+    prefix: true
+  "Getter":
+    call: kto
+    enabled: true
+    prefix: true
+  "Upload":
+    call: nowe
+    enabled: false
+    prefix: true
+  "Phrases":
+    call: leak
+    enabled: true
+    prefix: false

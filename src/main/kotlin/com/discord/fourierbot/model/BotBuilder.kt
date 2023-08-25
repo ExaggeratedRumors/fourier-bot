@@ -35,6 +35,7 @@ class BotBuilder {
             if(commandsList.commands[it.javaClass.simpleName]?.enabled == true) {
                 registeredCommands!![it.javaClass.simpleName] = it
                 it.call = commandsList.commands[it.javaClass.simpleName]!!.call
+                it.requirePrefix = commandsList.commands[it.javaClass.simpleName]!!.prefix
                 println("ENGINE: Command ${it.call} installed.")
             }
         }

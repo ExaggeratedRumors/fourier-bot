@@ -4,7 +4,10 @@ class CommandsContainer {
     companion object {
         val implementedCommands: List<Command> = listOf (
             Leak(),
-            Share()
+            Share(),
+            Phrases(),
+            Getter(),
+            Upload()
         )
     }
 }

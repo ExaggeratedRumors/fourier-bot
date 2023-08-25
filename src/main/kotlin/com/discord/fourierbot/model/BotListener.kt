@@ -6,9 +6,22 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 
 class BotListener(private val registeredCommands: Map<String, Command>): ListenerAdapter() {
-
     override fun onMessageReceived(event: MessageReceivedEvent) {
         if(event.author.isBot) return
+        respondPrefixMessages(event)
+        respondNonPrefixMessages(event)
+    }
+
+    private fun respondNonPrefixMessages(event: MessageReceivedEvent) {
+        registeredCommands.forEach {(_, command) ->
+            if(!command.requirePrefix && event.message.contentRaw.contains(command.call)) {
+                println("ENGINE: Attempt to execute command ${command.call}")
+                command.execute(event.message)
+            }
+        }
+    }
+
+    private fun respondPrefixMessages(event: MessageReceivedEvent) {
         val prefix = event.message.contentRaw.substring(
             0, Resources.configuration.prefix.length
         )
@@ -17,7 +30,7 @@ class BotListener(private val registeredCommands: Map<String, Command>): Listene
             Resources.configuration.prefix.length
         )
         registeredCommands.forEach { (_, command) ->
-            if(message.split(" ")[0] == command.call) {
+            if(command.requirePrefix && message.split(" ")[0] == command.call) {
                 println("ENGINE: Attempt to execute command ${command.call}")
                 command.execute(event.message)
             }

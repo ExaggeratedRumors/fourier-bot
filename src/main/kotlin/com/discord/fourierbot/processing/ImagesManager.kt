@@ -5,6 +5,9 @@ import com.discord.fourierbot.utils.ITEM_IMAGE_PATH
 import java.awt.Color
 import java.awt.Font
 import java.io.File
+import java.io.FileOutputStream
+import java.net.URL
+import java.nio.channels.Channels
 import java.nio.file.Files
 import javax.imageio.ImageIO
 
@@ -45,6 +48,16 @@ class ImagesManager {
             copiedImage.delete()
         } catch (e: Exception) {
             println("ENGINE: Image could not be deleted.")
+        }
+    }
+
+    fun downloadAndReplaceImage(url: String) {
+        URL(url).openStream().use {
+            Channels.newChannel(it).use { rbc ->
+                FileOutputStream(ITEM_IMAGE_PATH).use { fos ->
+                    fos.channel.transferFrom(rbc, 0, Long.MAX_VALUE)
+                }
+            }
         }
     }
 

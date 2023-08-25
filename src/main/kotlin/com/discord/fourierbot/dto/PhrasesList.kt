@@ -6,14 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class CommandsList (
-    val commands: Map<String, CommandEntity> = mapOf()
-)
-
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
-@JsonIgnoreProperties(ignoreUnknown = true)
-data class CommandEntity (
-    val call: String = String(),
-    val enabled: Boolean = false,
-    val prefix: Boolean = false
+data class PhrasesList (
+    val phrases: List<String> = listOf()
 )

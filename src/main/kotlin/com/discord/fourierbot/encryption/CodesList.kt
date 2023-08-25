@@ -1,8 +1,10 @@
 package com.discord.fourierbot.encryption
 
 import com.discord.fourierbot.dto.UserEntity
+import java.io.*
 
-class CodesList {
+
+class CodesList : Serializable {
     val userEntities = mutableListOf<UserEntity>()
 
     fun modify(block: MutableList<UserEntity>.() -> Unit) {

@@ -1,13 +1,13 @@
 # Fourier Bot
 
-![](https://shields.io/badge/JDA-5.0-violet) ![](https://shields.io/badge/v1.0b-purple)
+![](https://shields.io/badge/JDA-5.0-violet) ![](https://shields.io/badge/v1.1-purple)
 
 Discord desktop application bot based on JDA for kotlin, processing images and sending it to users including private key as watermark.
 
 ## Release
 
 `
-version 1.0b
+version 1.1
 `
 
 ## Technologies

@@ -3,6 +3,7 @@ package com.discord.fourierbot.encryption
 import com.discord.fourierbot.dto.UserEntity
 import com.discord.fourierbot.utils.KEYS_PATH
 import com.discord.fourierbot.utils.Resources
+import com.discord.fourierbot.utils.YamlManager
 import java.io.*
 import java.security.NoSuchAlgorithmException
 import java.util.*
@@ -21,6 +22,8 @@ class CodesManager {
                 .getEncoder()
                 .encodeToString(key.encoded)
                 .substring(0, keyLength)
+                .replace("\\", "o")
+                .replace("/", "i")
         } catch(e: NoSuchAlgorithmException) {
             println("ENGINE: Entered key generating algorithm is incorrect.")
             exitProcess(1)
@@ -28,20 +31,24 @@ class CodesManager {
     }
 
     private fun serialize() {
-        ObjectOutputStream(FileOutputStream(KEYS_PATH)).let {
-            it.writeObject(Resources.keys)
-            it.flush()
-            it.close()
+        try {
+            YamlManager.writeYamlObject(KEYS_PATH, Resources.keys)
+        } catch (e: Exception) {
+            println("ENGINE: Cannot save list object.")
+            e.printStackTrace()
         }
     }
 
     fun deserialize(): CodesList {
         val keysFile = File(KEYS_PATH)
         if(!keysFile.exists()) return CodesList()
-        val stream = ObjectInputStream(FileInputStream(keysFile))
-        val codeList = stream.readObject() as CodesList
-        stream.close()
-        return codeList
+        return try {
+            YamlManager.readYamlObject(KEYS_PATH, CodesList::class.java)
+        } catch (e: Exception) {
+            println("ENGINE: Error occurred with reading keys file.")
+            e.printStackTrace()
+            CodesList()
+        }
     }
 
     fun addEntity(userId: Long, userName: String): String{
@@ -68,9 +75,9 @@ class CodesManager {
     }
 
     fun getUsersList(): String {
-        val usersList = String()
+        var usersList = String()
         Resources.keys.userEntities.forEach {
-            usersList.plus("${it.userId} ${it.userName} ${it.code}\n")
+            usersList = usersList.plus("${it.userName} ${it.userId} ${it.code}\n")
         }
         return usersList
     }

@@ -6,8 +6,6 @@ import net.dv8tion.jda.api.entities.Message
 
 class Upload : Command() {
     override fun execute(message: Message) {
-        //TODO:
-        //Uploadować plik i zamieniać w miejscu PNG itemów
         if(message.attachments.first().contentType != "image/png") {
             message.author
                 .openPrivateChannel()

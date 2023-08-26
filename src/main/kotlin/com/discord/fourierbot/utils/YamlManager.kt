@@ -8,7 +8,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.system.exitProcess
 
-class YamlReader {
+class YamlManager {
     companion object {
         private val mapper = ObjectMapper(YAMLFactory()).apply {
             this.registerModule(
@@ -32,5 +32,15 @@ class YamlReader {
             println("ENGINE: Cannot read $sourcePath file or file is incorrect with data object.")
             exitProcess(1)
         }!!
+
+        fun writeYamlObject(sourcePath: String, value: Any) = try {
+            Files.newBufferedWriter(Paths.get(sourcePath))
+                .use {
+                    mapper.writeValue(it, value)
+                }
+        } catch (e: Exception) {
+            println("ENGINE: Cannot write to yaml object.")
+            exitProcess(1)
+        }
     }
 }

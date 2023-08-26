@@ -15,9 +15,9 @@ class Resources {
         var keys: CodesList = CodesList()
 
         fun loadResources() {
-            configuration = YamlReader.readYamlObject(CONFIGURATION_PATH, Configuration::class.java)
-            commandsList = YamlReader.readYamlObject(COMMANDS_PATH, CommandsList::class.java)
-            phrasesList = YamlReader.readYamlObject(PHRASES_PATH, PhrasesList::class.java)
+            configuration = YamlManager.readYamlObject(CONFIGURATION_PATH, Configuration::class.java)
+            commandsList = YamlManager.readYamlObject(COMMANDS_PATH, CommandsList::class.java)
+            phrasesList = YamlManager.readYamlObject(PHRASES_PATH, PhrasesList::class.java)
             keys = CodesManager().deserialize()
         }
     }

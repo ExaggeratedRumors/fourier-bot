@@ -15,5 +15,6 @@ data class CommandsList (
 data class CommandEntity (
     val call: String = String(),
     val enabled: Boolean = false,
-    val prefix: Boolean = false
+    val prefix: Boolean = false,
+    val admin: Boolean = false
 )

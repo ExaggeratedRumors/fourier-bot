@@ -3,19 +3,24 @@ commands:
     call: wyciek
     enabled: true
     prefix: true
+    admin: false
   "Share":
     call: itemy
     enabled: true
     prefix: true
+    admin: false
   "Getter":
     call: kto
     enabled: true
     prefix: true
+    admin: true
   "Upload":
     call: nowe
-    enabled: false
+    enabled: true
     prefix: true
+    admin: true
   "Phrases":
     call: leak
     enabled: true
     prefix: false
+    admin: false

@@ -36,6 +36,7 @@ class BotBuilder {
                 registeredCommands!![it.javaClass.simpleName] = it
                 it.call = commandsList.commands[it.javaClass.simpleName]!!.call
                 it.requirePrefix = commandsList.commands[it.javaClass.simpleName]!!.prefix
+                it.requireAdmin = commandsList.commands[it.javaClass.simpleName]!!.admin
                 println("ENGINE: Command ${it.call} installed.")
             }
         }

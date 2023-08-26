@@ -7,33 +7,28 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
 
 class BotListener(private val registeredCommands: Map<String, Command>): ListenerAdapter() {
     override fun onMessageReceived(event: MessageReceivedEvent) {
-        if(event.author.isBot) return
-        respondPrefixMessages(event)
-        respondNonPrefixMessages(event)
-    }
-
-    private fun respondNonPrefixMessages(event: MessageReceivedEvent) {
-        registeredCommands.forEach {(_, command) ->
-            if(!command.requirePrefix && event.message.contentRaw.contains(command.call)) {
-                println("ENGINE: Attempt to execute command ${command.call}")
-                command.execute(event.message)
-            }
-        }
-    }
-
-    private fun respondPrefixMessages(event: MessageReceivedEvent) {
+        if (event.author.isBot || event.message.contentRaw.length < 3) return
         val prefix = event.message.contentRaw.substring(
             0, Resources.configuration.prefix.length
         )
-        if(prefix != Resources.configuration.prefix) return
         val message = event.message.contentRaw.drop(
             Resources.configuration.prefix.length
         )
+        val authorId = event.message.author.idLong
+
         registeredCommands.forEach { (_, command) ->
-            if(command.requirePrefix && message.split(" ")[0] == command.call) {
-                println("ENGINE: Attempt to execute command ${command.call}")
+            if (commandsConditions(command, prefix, message, authorId)) {
+                println("ENGINE: Attempt to execute command ${command.call}.")
                 command.execute(event.message)
             }
         }
+    }
+
+    private fun commandsConditions(command: Command, prefix: String, message: String, authorId: Long): Boolean {
+        if(command.requirePrefix && prefix != Resources.configuration.prefix) return false
+        if(command.requirePrefix && message.split(" ")[0] != command.call) return false
+        else if(!command.requirePrefix && !prefix.plus(message).contains(command.call)) return false
+        if(command.requireAdmin && authorId != Resources.configuration.admin_id) return false
+        return true
     }
 }

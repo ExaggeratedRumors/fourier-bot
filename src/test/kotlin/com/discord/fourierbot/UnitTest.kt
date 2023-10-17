@@ -26,8 +26,6 @@ class UnitTest {
         val code = "234dg23wsa213"
         val imageManager = ImagesManager()
         imageManager.createImageCopy(code)
-        //assertEquals(true, imageManager.isImageExist(code))
+        assertEquals(true, imageManager.isImageExist(code))
     }
-
-
 }

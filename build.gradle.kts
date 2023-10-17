@@ -5,6 +5,12 @@ plugins {
     application
 }
 
+sourceSets {
+    main {
+        //resources.srcDirs("src/main/resources")
+    }
+}
+
 group = "com.discord"
 version = "0.0.1-SNAPSHOT"
 
@@ -46,4 +52,14 @@ tasks.test {
 
 application {
     mainClass.set("com.discord.fourierbot.FourierBotApplicationKt")
+}
+
+tasks.jar {
+    manifest.attributes["Main-Class"] = "com.discord.fourierbot.FourierBotApplicationKt"
+    val dependencies = configurations
+        .runtimeClasspath
+        .get()
+        .map(::zipTree) // OR .map { zipTree(it) }
+    from(dependencies)
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

@@ -33,6 +33,19 @@ class YamlManager {
             exitProcess(1)
         }!!
 
+/*        fun <T> readYamlObject(sourcePath: String, valueType: Class<T>) = try {
+            BufferedReader(
+                InputStreamReader(
+                    Thread.currentThread().contextClassLoader.getResourceAsStream(sourcePath)!!
+                )
+            ).use {
+                mapper.readValue(it, valueType)
+            }
+        } catch (e: Exception) {
+            println("ENGINE: Cannot read $sourcePath file or file is incorrect with data object.")
+            exitProcess(1)
+        }!!*/
+
         fun writeYamlObject(sourcePath: String, value: Any) = try {
             Files.newBufferedWriter(Paths.get(sourcePath))
                 .use {

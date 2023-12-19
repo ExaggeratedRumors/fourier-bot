@@ -10,6 +10,7 @@ data class Configuration (
     val client: ClientData = ClientData(),
     val prefix: String = String(),
     val key_length: Int = 10,
+    val key_rows: Int = 7,
     val admin_id: Long = 0
 )
 

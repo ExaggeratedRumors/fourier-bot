@@ -37,7 +37,8 @@ client:
   token: "YOUR_BOT_TOKEN"
   permission_integer: YOUR_PERMISSIONS_INTEGER
 prefix: "!"
-key_length: 10
+key_length: 20
+key_rows: 12
 admin_id: YOUR_DISCORD_ID 
 ```
 4. Add image `items.png` to directory `src/main/resources/images`.

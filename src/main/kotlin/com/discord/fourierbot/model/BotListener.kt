@@ -2,6 +2,7 @@ package com.discord.fourierbot.model
 
 import com.discord.fourierbot.commands.Command
 import com.discord.fourierbot.utils.Resources
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 

@@ -13,6 +13,7 @@ class Resources {
         var commandsList: CommandsList = CommandsList()
         var phrasesList: PhrasesList = PhrasesList()
         var keys: CodesList = CodesList()
+        val illegalChars = listOf(",", ".", "/", "\\", "_")
 
         fun loadResources() {
             configuration = YamlManager.readYamlObject(CONFIGURATION_PATH, Configuration::class.java)

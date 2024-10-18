@@ -17,12 +17,21 @@ class BotListener(private val registeredCommands: Map<String, Command>): Listene
         )
         val authorId = event.message.author.idLong
 
+        if(!validate(message)) return
+
         registeredCommands.forEach { (_, command) ->
             if (commandsConditions(command, prefix, message, authorId)) {
                 println("ENGINE: Attempt to execute command ${command.call}.")
                 command.execute(event.message)
             }
         }
+    }
+
+    private fun validate(message: String): Boolean {
+        Resources.illegalChars.forEach {
+            if(message.contains(it)) return false
+        }
+        return true
     }
 
     private fun commandsConditions(command: Command, prefix: String, message: String, authorId: Long): Boolean {
